@@ -1,4 +1,6 @@
-import { ActionFunctionArgs } from 'react-router-dom'
+import { ActionFunctionArgs, redirect } from 'react-router-dom'
+
+import auth from '../lib/auth'
 
 export const signInAction = async (args: ActionFunctionArgs) => {
   const { request } = args
@@ -21,8 +23,7 @@ export const signInAction = async (args: ActionFunctionArgs) => {
   }
 
   const { token } = await response.json()
-  console.log(token)
+  auth.signIn(token)
 
-  return null
-  // return redirect('/')
+  return redirect('/')
 }
