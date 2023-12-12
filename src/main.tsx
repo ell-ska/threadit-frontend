@@ -4,8 +4,8 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 
 import Layout from './Layout.tsx'
 import Home from './routes/Home.tsx'
-import SignIn from './components/SignIn.tsx'
-import SignUp from './components/SignUp.tsx'
+import SignIn from './routes/SignIn.tsx'
+import SignUp from './routes/SignUp.tsx'
 import './index.css'
 
 const router = createBrowserRouter([
