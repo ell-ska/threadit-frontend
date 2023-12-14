@@ -2,8 +2,7 @@ import { ActionFunctionArgs, redirect } from 'react-router-dom'
 
 import auth from '../lib/auth'
 
-export const signInAction = async (args: ActionFunctionArgs) => {
-  const { request } = args
+export const signInAction = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData()
 
   const username = formData.get('username')

@@ -5,6 +5,8 @@ import { RouterProvider, createBrowserRouter, redirect } from 'react-router-dom'
 import auth from './lib/auth.ts'
 import Layout from './Layout.tsx'
 import Home from './routes/Home.tsx'
+import CreatePost from './routes/CreatePost.tsx'
+import { createPostAction } from './actions/create-post.ts'
 import SignIn from './routes/SignIn.tsx'
 import { signInAction } from './actions/sign-in.ts'
 import SignUp from './routes/SignUp.tsx'
@@ -19,6 +21,11 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />
+      },
+      {
+        path: '/create-post',
+        action: createPostAction,
+        element: <CreatePost />
       }
     ]
   },

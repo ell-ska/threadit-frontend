@@ -10,13 +10,19 @@ const Header = () => {
   return (
     <header className='main py-4 flex justify-between items-center'>
       <h1 className='text-2xl font-bold'>Threadit</h1>
-      <div className='space-x-4'>
+      <div className='flex gap-4 items-center'>
         {isAuthenticated ? (
-          <fetcher.Form method='post' action='/sign-out'>
-            <Button type='submit' variant='ghost' size='sm'>sign out</Button>
-          </fetcher.Form>
+          <>
+            <Link to='/create-post'>New post</Link>
+            <fetcher.Form method='post' action='/sign-out'>
+              <Button type='submit' variant='ghost' size='sm'>sign out</Button>
+            </fetcher.Form>
+          </>
         ) : (
-          <Link to='/sign-in' className={buttonVariants({ variant: 'secondary', size: 'sm' })}>sign in</Link>
+          <Link
+            to='/sign-in'
+            className={buttonVariants({ variant: 'secondary', size: 'sm' })}
+          >sign in</Link>
         )}
       </div>
     </header>

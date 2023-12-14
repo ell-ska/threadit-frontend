@@ -1,6 +1,12 @@
-import { cn } from "../../utils/classnames"
+import { cva } from 'class-variance-authority'
+
+import { cn } from '../../utils/classnames'
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {}
+
+export const inputVariants = cva(
+  'placeholder:text-zinc-500 border border-zinc-500 rounded-lg py-2 px-4 outline-none focus-visible:border-secondary shadow-[0_0_0_9999px_white_inset]',
+)
 
 const Input = ({
   className,
@@ -8,10 +14,7 @@ const Input = ({
 }: InputProps) => {
   return (
     <input
-      className={cn(
-        'placeholder:text-zinc-500 border border-zinc-500 rounded-lg py-2 px-4 outline-none focus-visible:border-secondary shadow-[0_0_0_9999px_white_inset]',
-        className
-      )}
+      className={cn(inputVariants({ className }))}
       {...props}
     />
   )

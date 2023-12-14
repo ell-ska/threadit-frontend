@@ -2,9 +2,10 @@ import { Form, Link, useActionData } from 'react-router-dom'
 
 import Button from '../components/ui/Button'
 import Input from '../components/ui/Input'
+import { ActionData } from '../types'
 
 const SignIn = () => {
-  const error = useActionData() as { message: string } | undefined
+  const error = useActionData() as ActionData
 
   return (
     <main className='main max-w-lg flex flex-col items-center mt-28'>
