@@ -5,7 +5,13 @@ import auth from '../lib/auth'
 export const createPostAction = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData()
 
-  const postData = Object.fromEntries(formData.entries())
+  const postData = {
+    title: formData.get('title'),
+    link: {
+      url: formData.get('link')
+    },
+    body: formData.get('text')
+  }
 
   const response = await fetch(import.meta.env.VITE_BACKEND_URL + '/posts', {
     method: 'POST',

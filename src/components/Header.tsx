@@ -9,7 +9,7 @@ const Header = () => {
 
   return (
     <header className='main py-4 flex justify-between items-center'>
-      <h1 className='text-2xl font-bold'>Threadit</h1>
+      <Link to='/' className='text-2xl font-bold'>Threadit</Link>
       <div className='flex gap-4 items-center'>
         {isAuthenticated ? (
           <>
