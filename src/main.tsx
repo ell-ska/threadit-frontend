@@ -1,7 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { RouterProvider, createBrowserRouter, redirect } from 'react-router-dom'
 
+import auth from './lib/auth.ts'
 import Layout from './Layout.tsx'
 import Home from './routes/Home.tsx'
 import SignIn from './routes/SignIn.tsx'
@@ -30,6 +31,13 @@ const router = createBrowserRouter([
     path: '/sign-up',
     action: signUpAction,
     element: <SignUp />
+  },
+  {
+    path: '/sign-out',
+    action: () => {
+      auth.signOut()
+      return redirect('/')
+    }
   }
 ])
 

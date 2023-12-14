@@ -2,17 +2,23 @@ import { VariantProps, cva } from 'class-variance-authority'
 
 import { cn } from '../../utils/classnames'
 
-const buttonVariants = cva(
-  'rounded-full transition hover:scale-[1.025] text-center px-8 py-4 inline-flex items-center justify-center gap-2',
+export const buttonVariants = cva(
+  'rounded-full transition text-center inline-flex items-center justify-center gap-2',
   {
     variants: {
       variant: {
-        primary: 'bg-zinc-800 text-white',
-        secondary: 'bg-primary text-white',
+        primary: 'bg-zinc-800 text-white hover:scale-[1.025]',
+        secondary: 'bg-primary text-white hover:scale-[1.025]',
+        ghost: 'bg-transparent hover:bg-zinc-100'
+      },
+      size: {
+        md: 'px-8 py-4',
+        sm: 'px-4 py-2'
       }
     },
     defaultVariants: {
-      variant: 'primary'
+      variant: 'primary',
+      size: 'md'
     },
   },
 )
@@ -24,12 +30,13 @@ interface ButtonProps
 const Button = ({
   children,
   variant,
+  size,
   className,
   ...props
 }: ButtonProps) => {
   return (
     <button
-      className={cn(buttonVariants({ variant, className }))}
+      className={cn(buttonVariants({ variant, className, size }))}
       {...props}
     >
       {children}
