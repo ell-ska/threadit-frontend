@@ -1,4 +1,15 @@
-export type ActionData = { message: string } | undefined 
+export type ActionData = { message: string } | undefined
+
+type Author = {
+  _id: string
+  username: string
+}
+
+export type Comment = {
+  _id: string
+  body: string
+  author: Author
+}
 
 export type Post = {
   _id: string
@@ -8,8 +19,6 @@ export type Post = {
     image?: string
   }
   body?: string
-  author: {
-    _id: string
-    username: string
-  }
+  author: Author
+  comments?: Comment[]
 }

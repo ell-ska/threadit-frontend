@@ -7,9 +7,7 @@ export const createPostAction = async ({ request }: ActionFunctionArgs) => {
 
   const postData = {
     title: formData.get('title'),
-    link: {
-      url: formData.get('link')
-    },
+    link: formData.get('link'),
     body: formData.get('text')
   }
 

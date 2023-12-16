@@ -14,13 +14,14 @@ const Post = () => {
       </div>
       {post.link && (
         <Link to={post.link.url} className='block max-w-xs rounded-2xl border border-zinc-200 overflow-hidden'>
-          <img src={post.link.image} className='border-b border-zinc-200' />
+          {post.link.image && <img src={post.link.image} className='border-b border-zinc-200' />}
           <div className='flex justify-between gap-8 items-center px-4 py-2'>
             <span>{new URL(post.link.url).hostname}</span>
             <Button size='sm'>Open</Button>
           </div>
         </Link>
       )}
+      {post.comments?.map(comment => <p key={comment._id}>{comment.body}</p>)}
     </article>
 
   )
