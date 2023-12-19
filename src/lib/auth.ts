@@ -1,4 +1,4 @@
-import { client } from "./client"
+import { client } from './client'
 
 const signIn = (jwt: string, refreshToken?: string) => {
   localStorage.setItem('jwt', jwt)
@@ -6,7 +6,7 @@ const signIn = (jwt: string, refreshToken?: string) => {
 }
 
 const signOut = () => {
-  localStorage.clear()
+  localStorage.removeItem('jwt')
 }
 
 const isSignedIn = () => {

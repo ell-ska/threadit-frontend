@@ -36,13 +36,20 @@ const fetcher = async ({
     body,
     withAuth
   }: Fetcher): Promise<Response> => {
-  const response = await fetch(import.meta.env.VITE_BACKEND_URL + route, {
+  const _fetch = async () => fetch(import.meta.env.VITE_BACKEND_URL + route, {
     method: method,
     headers: await getHeaders(withAuth),
     body: method === 'POST' ? JSON.stringify(body) : null
   })
 
+  let response = await _fetch()
+
   if (!response.ok) {
+    if (response.status === (401 || 403)) {
+      auth.signOut()
+      response = await _fetch()
+    }
+
     const { message } = await response.json()
     return { error: message, data: null }
   }
