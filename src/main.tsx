@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { RouterProvider, createBrowserRouter, redirect } from 'react-router-dom'
 
 import auth from './lib/auth.ts'
+import { addCommentAction } from './actions/add-comment.ts'
 import Layout from './Layout.tsx'
 import Home from './routes/Home.tsx'
 import { homeLoader } from './loaders/home.ts'
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
             path: '/create-post',
             action: createPostAction,
             element: <CreatePost />
+          },
+          {
+            path: 'posts/:postId/comments',
+            action: addCommentAction
           }
         ]
       }

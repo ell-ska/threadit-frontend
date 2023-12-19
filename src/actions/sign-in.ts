@@ -1,6 +1,7 @@
 import { ActionFunctionArgs, redirect } from 'react-router-dom'
 
 import auth from '../lib/auth'
+import { client } from '../lib/client'
 
 export const signInAction = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData()
@@ -8,21 +9,14 @@ export const signInAction = async ({ request }: ActionFunctionArgs) => {
   const username = formData.get('username')
   const password = formData.get('password')
 
-  const response = await fetch(import.meta.env.VITE_BACKEND_URL + '/sign-in', {
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    method: 'POST',
-    body: JSON.stringify({ username, password })
+  const { data, error } = await client.post('/sign-in', {
+    body: { username, password }
   })
 
-  if (!response.ok) {
-    const { message } = await response.json()
-    return { message }
-  }
+  if (error) return error
 
-  const { token } = await response.json()
-  auth.signIn(token)
+  const { token, refreshToken } = data
+  auth.signIn(token, refreshToken)
 
   return redirect('/')
 }

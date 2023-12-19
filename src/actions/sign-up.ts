@@ -1,5 +1,7 @@
 import { ActionFunctionArgs, redirect } from 'react-router-dom'
 
+import { client } from '../lib/client'
+
 export const signUpAction = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData()
 
@@ -11,18 +13,10 @@ export const signUpAction = async ({ request }: ActionFunctionArgs) => {
     return { message: "passwords don't match" }
   }
 
-  const response = await fetch(import.meta.env.VITE_BACKEND_URL + '/sign-up', {
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    method: 'POST',
-    body: JSON.stringify({ username, password })
+  const { error } = await client.post('/sign-up', {
+    body: { username, password }
   })
 
-  if (!response.ok) {
-    const { message } = await response.json()
-    return { message }
-  }
-
+  if (error) return error
   return redirect('/sign-in')
 }

@@ -1,6 +1,6 @@
 import { ActionFunctionArgs, redirect } from 'react-router-dom'
 
-import auth from '../lib/auth'
+import { client } from '../lib/client'
 
 export const createPostAction = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData()
@@ -11,19 +11,11 @@ export const createPostAction = async ({ request }: ActionFunctionArgs) => {
     body: formData.get('text')
   }
 
-  const response = await fetch(import.meta.env.VITE_BACKEND_URL + '/posts', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${auth.getJWT()}`
-    },
-    body: JSON.stringify(postData)
+  const { error } = await client.post('/posts', {
+    withAuth: true,
+    body: postData
   })
 
-  if (!response.ok) {
-    const { message } = await response.json()
-    return { message }
-  }
-
+  if (error) return error
   return redirect('/')
 }

@@ -15,8 +15,8 @@ const SignIn = () => {
         <p className='text-zinc-600 text-center'>Please enter your details</p>
       </div>
       <Form method='post' className='flex flex-col w-full relative'>
-      {error && <p className='absolute -top-8 left-1/2 -translate-x-1/2 text-primary whitespace-nowrap'>{error.message}</p>}
-      <label htmlFor='username' hidden>Enter your username</label>
+        {error && <p className='absolute -top-8 left-1/2 -translate-x-1/2 text-primary whitespace-nowrap'>{error.message}</p>}
+        <label htmlFor='username' hidden>Enter your username</label>
         <Input
           className='mb-8'
           type='text'

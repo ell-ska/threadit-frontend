@@ -1,5 +1,6 @@
 import { Link, useLoaderData } from 'react-router-dom'
 
+import CommentForm from '../components/CommentForm'
 import Button from '../components/ui/Button'
 import { Post as TPost } from '../types'
 
@@ -7,6 +8,7 @@ const Post = () => {
   const post = useLoaderData() as TPost
 
   return (
+    <>
     <article className='flex justify-between items-start mt-12'>
       <div>
         <h1 className='text-3xl font-bold'>{post.title}</h1>
@@ -21,9 +23,12 @@ const Post = () => {
           </div>
         </Link>
       )}
-      {post.comments?.map(comment => <p key={comment._id}>{comment.body}</p>)}
     </article>
-
+    <div>
+      <CommentForm postId={post._id} />
+      {post.comments?.map(comment => <p key={comment._id}>{comment.body}</p>)}
+    </div>
+    </>
   )
 }
 
