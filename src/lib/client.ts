@@ -45,12 +45,14 @@ const fetcher = async ({
   let response = await _fetch()
 
   if (!response.ok) {
-    if (response.status === (401 || 403)) {
+    if (response.status === 401 || response.status === 403) {
       auth.signOut()
       response = await _fetch()
     }
+    console.log(response)
 
     const { message } = await response.json()
+    console.log(message)
     return { error: message, data: null }
   }
 
@@ -59,11 +61,11 @@ const fetcher = async ({
   return { data, error: null }
 }
 
-const get = async (route: string, options: { withAuth?: boolean }) => {
+const get = async (route: string, options?: { withAuth?: boolean }) => {
   return await fetcher({ method: 'GET', route, ...options })
 }
 
-const post = async (route: string, options: { withAuth?: boolean, body?: unknown }) => {
+const post = async (route: string, options?: { withAuth?: boolean, body?: unknown }) => {
   return await fetcher({ method: 'POST', route, ...options})
 }
 

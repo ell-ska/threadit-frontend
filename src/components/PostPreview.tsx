@@ -5,7 +5,7 @@ import { Post as TPost } from '../types'
 
 type PostProps = TPost
 
-const PostPreview = ({ _id, title, link, author }: PostProps) => {
+const PostPreview = ({ _id, title, link, author, upvotes, downvotes, score }: PostProps) => {
   const navigate = useNavigate()
 
   return (
@@ -17,7 +17,13 @@ const PostPreview = ({ _id, title, link, author }: PostProps) => {
       <div className='p-4'>
         <span>u/{author.username}</span>
         <h3 className='text-xl font-bold mb-6'>{title}</h3>
-        <Toolbar upvotes={64} comments={16} />
+        <Toolbar
+          postId={_id}
+          score={score}
+          upvotes={upvotes}
+          downvotes={downvotes}
+          comments={0}
+        />
       </div>
       {link?.image && (
         <img

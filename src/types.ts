@@ -21,4 +21,7 @@ export type Post = {
   body?: string
   author: Author
   comments?: Comment[]
+  upvotes: string[]
+  downvotes: string[]
+  score: number
 }

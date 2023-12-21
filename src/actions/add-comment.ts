@@ -11,8 +11,6 @@ export const addCommentAction = async ({ request, params }: ActionFunctionArgs) 
     body: { comment: formData.get('body') }
   })
 
-  return {
-    data: data.comments,
-    error
-  }
+  if (error) return error
+  return { comments: data.comments }
 }
