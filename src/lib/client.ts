@@ -1,22 +1,32 @@
 import auth from './auth'
 
+type OverrideHeaders = { [key: string]: string }
+
+type Override = {
+  body?: unknown
+  headers?: OverrideHeaders
+}
+
+type Options = {
+  withAuth?: boolean,
+  body?: unknown,
+  override?: Override
+}
+
 type Fetcher = {
   method: 'POST' | 'GET' | 'DELETE' | 'PUT'
   route: string
   withAuth?: boolean
   body?: unknown
-  override?: {
-    body?: unknown
-    headers?: { [key: string]: string }
-  }
+  override?: Override
 }
 
 type Response = {
-  data: any | null
+  data: unknown | null
   error: string | null
 }
 
-const getHeaders = async (withAuth?: boolean, override?: { [key: string]: string }) => {
+const getHeaders = async (withAuth?: boolean, override?: OverrideHeaders) => {
   const headers = new Headers()
 
   if (!override) {
@@ -47,7 +57,7 @@ const fetcher = async ({
     method: method,
     headers: await getHeaders(withAuth, override?.headers),
     body:
-      override?.body && override.body instanceof FormData ? override.body
+      override?.body instanceof FormData ? override.body
       : body ? JSON.stringify(body)
       : null
   })
@@ -70,11 +80,11 @@ const fetcher = async ({
   return { data, error: null }
 }
 
-const get = async (route: string, options?: { withAuth?: boolean }) => {
+const get = async (route: string, options?: Pick<Options, 'withAuth'>) => {
   return await fetcher({ method: 'GET', route, ...options })
 }
 
-const post = async (route: string, options?: { withAuth?: boolean, body?: unknown, override?: { body?: unknown, headers?: { [key: string]: string } } }) => {
+const post = async (route: string, options?: Options) => {
   return await fetcher({ method: 'POST', route, ...options})
 }
 
