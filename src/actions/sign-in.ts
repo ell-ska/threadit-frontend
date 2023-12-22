@@ -1,7 +1,8 @@
 import { ActionFunctionArgs, redirect } from 'react-router-dom'
 
-import auth from '../lib/auth'
 import { client } from '../lib/client'
+import { validateSignIn } from '../lib/validation'
+import auth from '../lib/auth'
 
 export const signInAction = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData()
@@ -15,8 +16,11 @@ export const signInAction = async ({ request }: ActionFunctionArgs) => {
 
   if (error) return error
 
-  const { token, refreshToken } = data
-  auth.signIn(token, refreshToken)
+  const { validatedData, validationError } = validateSignIn(data)
+  if (validationError || !validatedData) return validationError
+
+  const { token, refreshToken, userId } = validatedData
+  auth.signIn(token, refreshToken, userId)
 
   return redirect('/')
 }
