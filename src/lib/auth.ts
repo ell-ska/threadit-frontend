@@ -6,7 +6,7 @@ const signIn = (jwt: string, refreshToken?: string) => {
 }
 
 const signOut = () => {
-  localStorage.removeItem('jwt')
+  localStorage.clear()
 }
 
 const isSignedIn = () => {

@@ -10,7 +10,7 @@ const CreatePost = () => {
   return (
     <div className='mt-12'>
       <h1 className='text-3xl font-bold mb-8'>Create a post</h1>
-      <Form method='post' className='flex flex-col items-center gap-6'>
+      <Form method='post' encType='multipart/form-data' className='flex flex-col items-center gap-6'>
           {error && <p className='absolute -top-8 left-1/2 -translate-x-1/2 text-primary whitespace-nowrap'>{error.message}</p>}
           <label htmlFor='title' hidden>Title</label>
           <Input
@@ -29,13 +29,14 @@ const CreatePost = () => {
             id='link'
             placeholder='Link'
           />
-          <label htmlFor='text' hidden>Text</label>
+          <label htmlFor='body' hidden>Text</label>
           <textarea
             className={inputVariants({ className: 'w-2/3 min-h-[12rem]' })}
-            name='text'
-            id='text'
+            name='body'
+            id='body'
             placeholder='Text'
           />
+          <input type='file' name='image' id='image' accept='image/*' />
           <Button type='submit'>Create post</Button>
       </Form>
     </div>
