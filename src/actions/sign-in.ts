@@ -1,4 +1,5 @@
 import { ActionFunctionArgs, redirect } from 'react-router-dom'
+import { toast } from 'sonner'
 
 import { client } from '../lib/client'
 import { validateSignIn } from '../lib/validation'
@@ -14,10 +15,10 @@ export const signInAction = async ({ request }: ActionFunctionArgs) => {
     body: { username, password }
   })
 
-  if (error) return error
+  if (error) return toast(error)
 
-  const { validatedData, validationError } = validateSignIn(data)
-  if (validationError || !validatedData) return validationError
+  const validatedData = validateSignIn(data)
+  if (!validatedData) return null
 
   const { token, refreshToken, userId } = validatedData
   auth.signIn(token, refreshToken, userId)

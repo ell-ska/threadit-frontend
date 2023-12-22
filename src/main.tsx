@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { RouterProvider, createBrowserRouter, redirect } from 'react-router-dom'
+import { Toaster } from 'sonner'
 
 import auth from './lib/auth.ts'
 import { addCommentAction } from './actions/add-comment.ts'
@@ -75,6 +76,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
+    <Toaster toastOptions={{
+      className: 'font-primary text-base bg-primary w-full p-4 rounded-lg text-white shadow-md',
+      unstyled: true
+    }} />
     <RouterProvider router={router} />
   </React.StrictMode>,
 )
