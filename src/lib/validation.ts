@@ -3,8 +3,9 @@ import { toast } from 'sonner'
 
 const validate = <T>(schema: z.ZodType<T>, data: unknown) => {
   const parsed = schema.safeParse(data)
-
+  
   if (!parsed.success) {
+    console.log(parsed)
     toast('something went terribly wrong')
     return undefined
   } else {
@@ -51,11 +52,17 @@ const postSchema = z.object({
   }).optional(),
   author: authorSchema,
   comments: commentSchema.array().optional(),
-  upvotes: z.string().array(),
-  downvotes: z.string().array(),
+  upvotes: z.string().array().optional(),
+  downvotes: z.string().array().optional(),
   score: z.number()
+})
+
+const feedSchema = z.object({
+  posts: postSchema.array(),
+  totalPages: z.number()
 })
 
 export const validateSignIn = (data: unknown) => validate(singInSchema, data)
 export const validateToken = (data: unknown) => validate(refreshTokenSchema, data)
 export const validatePost = (data: unknown) => validate(postSchema, data)
+export const validateFeed = (data: unknown) => validate(feedSchema, data)

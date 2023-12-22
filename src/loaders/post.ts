@@ -1,13 +1,18 @@
 import { LoaderFunctionArgs } from 'react-router-dom'
+import { toast } from 'sonner'
+
+import { client } from '../lib/client'
+import { validatePost } from '../lib/validation'
 
 export const postLoader = async ({ params }: LoaderFunctionArgs) => {
   const { id } = params
 
-  const response = await fetch(import.meta.env.VITE_BACKEND_URL + '/posts' + `/${id}`, {
-    headers: {
-      'Accepts': 'application/json'
-    }
-  })
+  const { data, error } = await client.get(`/posts/${id}`)
 
-  return await response.json()
+  if (error) return toast(error)
+
+  const validatedData = validatePost(data)
+  if (!validatedData) return null
+
+  return validatedData
 }

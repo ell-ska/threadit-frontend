@@ -1,16 +1,20 @@
 import { LoaderFunctionArgs } from 'react-router-dom'
+import { toast } from 'sonner'
+
+import { client } from '../lib/client'
+import { validateFeed } from '../lib/validation'
 
 export const homeLoader = async ({ request }: LoaderFunctionArgs) => {
   const url = new URL(request.url)
-  const page = url.searchParams.get('page') || 1
+  const page = url.searchParams.get('page') || '1'
 
-  const response = await fetch(import.meta.env.VITE_BACKEND_URL + '/posts' + `?page=${page}`, {
-    headers: {
-      'Accepts': 'application/json'
-    }
-  })
+  const { data, error } = await client.get('/posts' + `?page=${page}`)
+  console.log(data)
 
-  const data = await response.json()
+  if (error) return toast(error)
 
-  return { page, ...data }
+  const validatedData = validateFeed(data)
+  if (!validatedData) return null
+
+  return { page, ...validatedData }
 }
