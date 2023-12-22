@@ -1,4 +1,5 @@
 import { ActionFunctionArgs, redirect } from 'react-router-dom'
+import { toast } from 'sonner'
 
 import { client } from '../lib/client'
 
@@ -10,13 +11,13 @@ export const signUpAction = async ({ request }: ActionFunctionArgs) => {
   const passwordConfirmation = formData.get('password-confirmation')
 
   if (password !== passwordConfirmation) {
-    return { message: "passwords don't match" }
+    return toast("passwords don't match")
   }
 
   const { error } = await client.post('/sign-up', {
     body: { username, password }
   })
 
-  if (error) return error
+  if (error) return toast(error)
   return redirect('/sign-in')
 }

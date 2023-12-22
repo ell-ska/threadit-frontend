@@ -1,4 +1,5 @@
 import { ActionFunctionArgs, redirect } from 'react-router-dom'
+import { toast } from 'sonner'
 
 import { client } from '../lib/client'
 
@@ -12,7 +13,7 @@ export const createPostAction = async ({ request }: ActionFunctionArgs) => {
       body: formData
     }
   })
-
-  if (error) return error
+  
+  if (error) return toast(error)
   return redirect('/')
 }

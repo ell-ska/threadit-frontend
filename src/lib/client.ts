@@ -1,3 +1,4 @@
+import { validateToken } from './validation'
 import auth from './auth'
 
 type OverrideHeaders = { [key: string]: string }
@@ -37,7 +38,22 @@ const getHeaders = async (withAuth?: boolean, override?: OverrideHeaders) => {
     let jwt = auth.getJWT()
 
     if (!jwt) {
-      jwt = await auth.refreshJWTToken()
+      const refreshToken = localStorage.getItem('refresh-token')
+      if (!refreshToken) throw Error('no refresh token')
+    
+      const { data, error } = await client.post('/token/refresh', {
+        body: { refreshToken }
+      })
+    
+      if (error) throw Error(error)
+    
+      const validatedData = validateToken(data)
+      if (!validatedData) throw Error('malformed token')
+    
+      const { token } = validatedData
+    
+      auth.signIn(token)
+      jwt = token
     }
 
     headers.append('Authorization', `Bearer ${jwt}`)
@@ -62,22 +78,29 @@ const fetcher = async ({
       : null
   })
 
-  let response = await _fetch()
-
-  if (!response.ok) {
-    const { message } = await response.json()
-
-    if (message === 'token expired') {
-      localStorage.removeItem('jwt')
-      response = await _fetch()
-    } else {
-      return { error: message, data: null }
+  try {
+    let response = await _fetch()
+  
+    if (!response.ok) {
+      const { message } = await response.json()
+  
+      if (message === 'token expired') {
+        localStorage.removeItem('jwt')
+        response = await _fetch()
+      } else {
+        return { error: message, data: null }
+      }
     }
+  
+    const data = await response.json()
+    return { data, error: null }
+  } catch (error) {
+    console.log(error)
+    if (error instanceof Error) {
+      return { data: null, error: error.message }
+    }
+    return { data: null, error: 'something went terribly wrong' }
   }
-
-  const data = await response.json()
-
-  return { data, error: null }
 }
 
 const get = async (route: string, options?: Pick<Options, 'withAuth'>) => {

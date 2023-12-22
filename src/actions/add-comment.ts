@@ -1,6 +1,8 @@
 import { ActionFunctionArgs } from 'react-router-dom'
+import { toast } from 'sonner'
 
 import { client } from '../lib/client'
+import { validatePost } from '../lib/validation'
 
 export const addCommentAction = async ({ request, params }: ActionFunctionArgs) => {
   const { postId } = params
@@ -11,6 +13,10 @@ export const addCommentAction = async ({ request, params }: ActionFunctionArgs) 
     body: { comment: formData.get('body') }
   })
 
-  if (error) return error
-  return { comments: data.comments }
+  if (error) return toast(error)
+
+  const validatedData = validatePost(data)
+  if (!validatedData) return null
+
+  return { comments: validatedData.comments }
 }

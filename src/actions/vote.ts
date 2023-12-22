@@ -1,4 +1,5 @@
 import { ActionFunctionArgs, redirect } from 'react-router-dom'
+import { toast } from 'sonner'
 
 import { client } from '../lib/client'
 
@@ -11,6 +12,6 @@ export const voteAction = async ({ request, params }: ActionFunctionArgs) => {
 
   const { error } = await client.post(path, { withAuth: true })
 
-  if (error) return error
+  if (error) return toast(error)
   return redirect(formData.get('returnTo')?.toString() || '/')
 }
