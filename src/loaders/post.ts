@@ -4,7 +4,7 @@ import { toast } from 'sonner'
 import { client } from '../lib/client'
 import { validatePost } from '../lib/validation'
 
-export const postLoader = async ({ params }: LoaderFunctionArgs) => {
+export const post = async ({ params }: LoaderFunctionArgs) => {
   const { id } = params
 
   const { data, error } = await client.get(`/posts/${id}`)

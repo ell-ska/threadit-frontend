@@ -3,7 +3,7 @@ import { toast } from 'sonner'
 
 import { client } from '../lib/client'
 
-export const voteAction = async ({ request, params }: ActionFunctionArgs) => {
+export const vote = async ({ request, params }: ActionFunctionArgs) => {
   const { postId } = params
   const formData = await request.formData()
 

@@ -4,7 +4,7 @@ import { toast } from 'sonner'
 import { client } from '../lib/client'
 import { validatePost } from '../lib/validation'
 
-export const addCommentAction = async ({ request, params }: ActionFunctionArgs) => {
+export const addComment = async ({ request, params }: ActionFunctionArgs) => {
   const { postId } = params
   const formData = await request.formData()
 

@@ -5,7 +5,7 @@ import { client } from '../lib/client'
 import { validateSignIn } from '../lib/validation'
 import auth from '../lib/auth'
 
-export const signInAction = async ({ request }: ActionFunctionArgs) => {
+export const signIn = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData()
 
   const username = formData.get('username')

@@ -4,7 +4,7 @@ import { toast } from 'sonner'
 import { client } from '../lib/client'
 import { validateFeed } from '../lib/validation'
 
-export const homeLoader = async ({ request }: LoaderFunctionArgs) => {
+export const home = async ({ request }: LoaderFunctionArgs) => {
   const url = new URL(request.url)
   const page = parseInt(url.searchParams.get('page') || '1')
 

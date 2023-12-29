@@ -3,7 +3,7 @@ import { toast } from 'sonner'
 
 import { client } from '../lib/client'
 
-export const createPostAction = async ({ request }: ActionFunctionArgs) => {
+export const createPost = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData()
 
   const { error } = await client.post('/posts', {

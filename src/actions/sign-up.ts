@@ -3,7 +3,7 @@ import { toast } from 'sonner'
 
 import { client } from '../lib/client'
 
-export const signUpAction = async ({ request }: ActionFunctionArgs) => {
+export const signUp = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData()
 
   const username = formData.get('username')

@@ -3,23 +3,17 @@ import ReactDOM from 'react-dom/client'
 import { RouterProvider, createBrowserRouter, redirect } from 'react-router-dom'
 import { Toaster } from 'sonner'
 
+import loaders from './loaders/index.ts'
+import actions from './actions/index.ts'
 import auth from './lib/auth.ts'
-import { addCommentAction } from './actions/add-comment.ts'
-import { deleteCommentAction } from './actions/delete-comment.ts'
-import { voteAction } from './actions/vote.ts'
 import Layout from './Layout.tsx'
-import Home from './routes/Home.tsx'
-import { homeLoader } from './loaders/home.ts'
-import Post from './routes/Post.tsx'
-import { postLoader } from './loaders/post.ts'
-import CreatePost from './routes/CreatePost.tsx'
-import { createPostAction } from './actions/create-post.ts'
-import SignIn from './routes/SignIn.tsx'
-import { signInAction } from './actions/sign-in.ts'
-import SignUp from './routes/SignUp.tsx'
-import { signUpAction } from './actions/sign-up.ts'
-import './index.css'
 import RequireAuth from './components/RequireAuth.tsx'
+import Home from './routes/Home.tsx'
+import Post from './routes/Post.tsx'
+import CreatePost from './routes/CreatePost.tsx'
+import SignIn from './routes/SignIn.tsx'
+import SignUp from './routes/SignUp.tsx'
+import './index.css'
 
 const router = createBrowserRouter([
   {
@@ -28,12 +22,12 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        loader: homeLoader,
+        loader: loaders.home,
         element: <Home />
       },
       {
         path: '/post/:id',
-        loader: postLoader,
+        loader: loaders.post,
         element: <Post />
       },
       {
@@ -41,20 +35,20 @@ const router = createBrowserRouter([
         children: [
           {
             path: '/create-post',
-            action: createPostAction,
+            action: actions.createPost,
             element: <CreatePost />
           },
           {
             path: '/posts/:postId/comments',
-            action: addCommentAction
+            action: actions.addComment
           },
           {
             path: '/posts/:postId/comments/:commentId',
-            action: deleteCommentAction
+            action: actions.deleteComment
           },
           {
             path: '/posts/:postId/vote',
-            action: voteAction
+            action: actions.vote
           }
         ]
       }
@@ -62,12 +56,12 @@ const router = createBrowserRouter([
   },
   {
     path: '/sign-in',
-    action: signInAction,
+    action: actions.signIn,
     element: <SignIn />
   },
   {
     path: '/sign-up',
-    action: signUpAction,
+    action: actions.signUp,
     element: <SignUp />
   },
   {
