@@ -10,7 +10,7 @@ import { Post as TPost } from '../types'
 const Post = () => {
   const post = useLoaderData() as TPost | null
 
-  if (!post) return null
+  if (!post) return <p>hmm... can't find this post</p>
 
   return (
     <>

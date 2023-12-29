@@ -14,6 +14,7 @@ import CreatePost from './routes/CreatePost.tsx'
 import SignIn from './routes/SignIn.tsx'
 import SignUp from './routes/SignUp.tsx'
 import './index.css'
+import EditPost from './routes/EditPost.tsx'
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,12 @@ const router = createBrowserRouter([
             path: '/create-post',
             action: actions.createPost,
             element: <CreatePost />
+          },
+          {
+            path: '/post/:id/edit',
+            action: actions.editPost,
+            loader: loaders.post,
+            element: <EditPost />
           },
           {
             path: '/posts/delete/:id',

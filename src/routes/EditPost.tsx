@@ -1,12 +1,17 @@
-import { Form } from 'react-router-dom'
+import { Form, useLoaderData } from 'react-router-dom'
 
 import Button from '../components/ui/Button'
 import Input, { inputVariants } from '../components/ui/Input'
+import { Post } from '../types'
 
-const CreatePost = () => {
+const EditPost = () => {
+  const post = useLoaderData() as Post | null
+
+  if (!post) return <p>hmm... can't find this post</p>
+
   return (
-    <Form method='post' className='flex flex-col items-center gap-6 mt-12'>
-        <h1 className='w-2/3 text-3xl font-bold mb-8'>Create a post</h1>
+    <Form method='put' className='flex flex-col items-center gap-6 mt-12'>
+        <h1 className='w-2/3 text-3xl font-bold mb-8'>Edit post</h1>
         <label htmlFor='title' hidden>Title</label>
         <Input
           className='w-2/3'
@@ -14,6 +19,7 @@ const CreatePost = () => {
           name='title'
           id='title'
           placeholder='Title'
+          defaultValue={post.title}
           required
         />
         <label htmlFor='link' hidden>Link</label>
@@ -23,6 +29,7 @@ const CreatePost = () => {
           name='link'
           id='link'
           placeholder='Link'
+          defaultValue={post.link?.url}
         />
         <label htmlFor='body' hidden>Text</label>
         <textarea
@@ -30,10 +37,11 @@ const CreatePost = () => {
           name='body'
           id='body'
           placeholder='Text'
+          defaultValue={post.body}
         />
-        <Button type='submit'>Create post</Button>
+        <Button type='submit'>Save post</Button>
     </Form>
   )
 }
 
-export default CreatePost
+export default EditPost

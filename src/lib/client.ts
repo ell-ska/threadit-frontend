@@ -115,10 +115,15 @@ const deleteRequest = async (route: string, options?: Options) => {
   return await fetcher({ method: 'DELETE', route, ...options})
 }
 
+const put = async (route: string, options?: Options) => {
+  return await fetcher({ method: 'PUT', route, ...options})
+}
+
 const client = {
   get,
   post,
-  delete: deleteRequest
+  delete: deleteRequest,
+  put
 }
 
 export { client }

@@ -85,7 +85,15 @@ const Toolbar = ({ postId, score, comments, upvotes, downvotes, authorId }: Tool
             </Button>
           </Form>
 
-          <Button size='icon' variant='ghost' className='bg-zinc-100 hover:bg-zinc-50'>
+          <Button
+            onClick={(e) => {
+              e.stopPropagation()
+              navigate(`/post/${postId}/edit`)
+            }}
+            size='icon'
+            variant='ghost'
+            className='bg-zinc-100 hover:bg-zinc-50'
+          >
             <Pencil />
           </Button>
         </>
