@@ -66,3 +66,7 @@ export const validateSignIn = (data: unknown) => validate(singInSchema, data)
 export const validateToken = (data: unknown) => validate(refreshTokenSchema, data)
 export const validatePost = (data: unknown) => validate(postSchema, data)
 export const validateFeed = (data: unknown) => validate(feedSchema, data)
+
+export type Post = z.infer<typeof postSchema>
+export type Comment = z.infer<typeof commentSchema>
+export type Feed = z.infer<typeof feedSchema>

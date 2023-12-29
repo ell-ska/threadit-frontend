@@ -18,7 +18,7 @@ const Pagination = ({ currentPage, totalPages, setPage }: PaginationProps) => {
           size='sm'
           key={page}
           onClick={() => setPage(page)}
-          className={cn('bg-zinc-100 hover:bg-zinc-200', currentPage == page && 'bg-zinc-200')}
+          className={cn('bg-zinc-100 hover:bg-zinc-200', currentPage === page && 'bg-zinc-200')}
         >
           {page}
         </Button>

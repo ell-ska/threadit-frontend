@@ -1,27 +1,10 @@
+import {
+  Post as _Post,
+  Comment as _Comment,
+  Feed as _Feed
+} from './lib/validation'
+
 export type ActionData = { message: string } | undefined
-
-type Author = {
-  _id: string
-  username: string
-}
-
-export type Comment = {
-  _id: string
-  body: string
-  author: Author
-}
-
-export type Post = {
-  _id: string
-  title: string
-  link?: {
-    url: string
-    image?: string
-  }
-  body?: string
-  author: Author
-  comments?: Comment[]
-  upvotes: string[]
-  downvotes: string[]
-  score: number
-}
+export type Post = _Post
+export type Comment = _Comment
+export type Feed = _Feed & { page: number }

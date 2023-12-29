@@ -2,10 +2,10 @@ import { useLoaderData, useSearchParams } from 'react-router-dom'
 
 import PostPreview from '../components/PostPreview'
 import Pagination from '../components/Pagination'
-import { Post as TPost } from '../types'
+import { Feed } from '../types'
 
 const Home = () => {
-  const data = useLoaderData() as { posts: TPost[], totalPages: number, page: number } | undefined
+  const data = useLoaderData() as Feed | null
   const [searchParams, setSearchParams] = useSearchParams()
 
   return (
