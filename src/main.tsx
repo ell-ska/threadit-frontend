@@ -39,6 +39,10 @@ const router = createBrowserRouter([
             element: <CreatePost />
           },
           {
+            path: '/posts/delete/:id',
+            action: actions.deletePost
+          },
+          {
             path: '/posts/:postId/comments',
             action: actions.addComment
           },

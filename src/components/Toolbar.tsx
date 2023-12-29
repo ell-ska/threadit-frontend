@@ -1,5 +1,5 @@
 import { Form, useLocation, useNavigate } from 'react-router-dom'
-import { ArrowBigDown, ArrowBigUp, MessageCircle } from 'lucide-react'
+import { ArrowBigDown, ArrowBigUp, MessageCircle, Trash, Pencil } from 'lucide-react'
 
 import auth from '../lib/auth'
 import { cn } from '../utils/classnames'
@@ -11,12 +11,15 @@ type ToolbarProps = {
   upvotes: string[] | undefined
   downvotes: string[] | undefined
   comments: number | undefined
+  authorId?: string
 }
 
-const Toolbar = ({ postId, score, comments, upvotes, downvotes }: ToolbarProps) => {
+const Toolbar = ({ postId, score, comments, upvotes, downvotes, authorId }: ToolbarProps) => {
   const location = useLocation()
   const navigate = useNavigate()
+  
   const userId = auth.getUser()
+  const isHomePage = location.pathname === '/'
 
   return (
     <div className='flex gap-4 items-center'>
@@ -60,7 +63,7 @@ const Toolbar = ({ postId, score, comments, upvotes, downvotes }: ToolbarProps) 
           onClick={(e) => {
             e.stopPropagation()
             navigate(
-              location.pathname === '/'
+              isHomePage
                 ? `post/${postId}/#comments`
                 : '#comments'
             )
@@ -73,6 +76,20 @@ const Toolbar = ({ postId, score, comments, upvotes, downvotes }: ToolbarProps) 
           <span>{comments}</span>
         </Button>
       </div>
+      
+      {!isHomePage && authorId === userId && (
+        <>
+          <Form method='delete' action={`/posts/delete/${postId}`}>
+            <Button size='icon' variant='ghost' className='bg-zinc-100 hover:bg-zinc-50'>
+              <Trash />
+            </Button>
+          </Form>
+
+          <Button size='icon' variant='ghost' className='bg-zinc-100 hover:bg-zinc-50'>
+            <Pencil />
+          </Button>
+        </>
+      )}
     </div>
   )
 }

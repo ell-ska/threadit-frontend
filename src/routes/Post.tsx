@@ -24,9 +24,9 @@ const Post = () => {
           <h1 className='text-3xl font-bold mt-2'>{post.title}</h1>
           {post.body && <p className='md:w-4/5 mt-4'>{post.body}</p>}
         </div>
-        <div className='space-y-4'>
+        <div className='space-y-4 shrink-0'>
           {post.link && (
-            <Link to={post.link.url} className='block shrink-0 w-full sm:max-w-xs rounded-2xl border border-zinc-200 overflow-hidden'>
+            <Link to={post.link.url} className='block w-full sm:max-w-xs rounded-2xl border border-zinc-200 overflow-hidden'>
               {post.link.image && <img src={post.link.image} className='border-b border-zinc-200' />}
               <div className='flex justify-between gap-8 items-center px-4 py-2'>
                 <span>{new URL(post.link.url).hostname}</span>
@@ -40,6 +40,7 @@ const Post = () => {
             upvotes={post.upvotes}
             downvotes={post.downvotes}
             comments={post.comments?.length}
+            authorId={typeof post.author !== 'string' ? post.author._id : post.author}
           />
         </div>
       </article>
