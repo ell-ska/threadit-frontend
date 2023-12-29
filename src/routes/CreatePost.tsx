@@ -1,17 +1,13 @@
-import { Form, useActionData } from 'react-router-dom'
+import { Form } from 'react-router-dom'
 
 import Button from '../components/ui/Button'
 import Input, { inputVariants } from '../components/ui/Input'
-import { ActionData } from '../types'
 
 const CreatePost = () => {
-  const error = useActionData() as ActionData
-
   return (
     <div className='mt-12'>
       <h1 className='text-3xl font-bold mb-8'>Create a post</h1>
       <Form method='post' encType='multipart/form-data' className='flex flex-col items-center gap-6'>
-          {error && <p className='absolute -top-8 left-1/2 -translate-x-1/2 text-primary whitespace-nowrap'>{error.message}</p>}
           <label htmlFor='title' hidden>Title</label>
           <Input
             className='w-2/3'

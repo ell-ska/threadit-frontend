@@ -17,6 +17,7 @@ export const addCommentAction = async ({ request, params }: ActionFunctionArgs) 
     toast(error)
     return null
   }
+  
   const validatedData = validatePost(data)
   if (!validatedData) return null
 
