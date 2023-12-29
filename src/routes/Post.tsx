@@ -56,6 +56,7 @@ const Post = () => {
           }).map(comment => (
             <Comment
               key={comment._id}
+              postId={post._id}
               {...comment}
             />
           ))}

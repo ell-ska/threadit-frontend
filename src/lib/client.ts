@@ -39,7 +39,7 @@ const getHeaders = async (withAuth?: boolean, override?: OverrideHeaders) => {
 
     if (!jwt) {
       const refreshToken = localStorage.getItem('refresh-token')
-      if (!refreshToken) throw Error('no refresh token')
+      if (!refreshToken) throw Error('you have to sign in to do that')
     
       const { data, error } = await client.post('/token/refresh', {
         body: { refreshToken }
@@ -111,9 +111,14 @@ const post = async (route: string, options?: Options) => {
   return await fetcher({ method: 'POST', route, ...options})
 }
 
+const deleteRequest = async (route: string, options?: Options) => {
+  return await fetcher({ method: 'DELETE', route, ...options})
+}
+
 const client = {
   get,
-  post
+  post,
+  delete: deleteRequest
 }
 
 export { client }

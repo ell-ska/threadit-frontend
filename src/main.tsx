@@ -5,6 +5,7 @@ import { Toaster } from 'sonner'
 
 import auth from './lib/auth.ts'
 import { addCommentAction } from './actions/add-comment.ts'
+import { deleteCommentAction } from './actions/delete-comment.ts'
 import { voteAction } from './actions/vote.ts'
 import Layout from './Layout.tsx'
 import Home from './routes/Home.tsx'
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
           {
             path: '/posts/:postId/comments',
             action: addCommentAction
+          },
+          {
+            path: '/posts/:postId/comments/:commentId',
+            action: deleteCommentAction
           },
           {
             path: '/posts/:postId/vote',
