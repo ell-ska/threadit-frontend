@@ -14,6 +14,10 @@ export const createPostAction = async ({ request }: ActionFunctionArgs) => {
     }
   })
   
-  if (error) return toast(error)
+  if (error) {
+    toast(error)
+    return null
+  }
+  
   return redirect('/')
 }

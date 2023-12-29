@@ -15,8 +15,11 @@ export const signInAction = async ({ request }: ActionFunctionArgs) => {
     body: { username, password }
   })
 
-  if (error) return toast(error)
-
+  if (error) {
+    toast(error)
+    return null
+  }
+  
   const validatedData = validateSignIn(data)
   if (!validatedData) return null
 

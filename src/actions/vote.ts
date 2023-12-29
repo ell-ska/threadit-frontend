@@ -12,6 +12,10 @@ export const voteAction = async ({ request, params }: ActionFunctionArgs) => {
 
   const { error } = await client.post(path, { withAuth: true })
 
-  if (error) return toast(error)
+  if (error) {
+    toast(error)
+    return null
+  }
+  
   return redirect(formData.get('returnTo')?.toString() || '/')
 }

@@ -11,7 +11,10 @@ export const homeLoader = async ({ request }: LoaderFunctionArgs) => {
   const { data, error } = await client.get('/posts' + `?page=${page}`)
   console.log(data)
 
-  if (error) return toast(error)
+  if (error) {
+    toast(error)
+    return null
+  }
 
   const validatedData = validateFeed(data)
   if (!validatedData) return null

@@ -18,6 +18,10 @@ export const signUpAction = async ({ request }: ActionFunctionArgs) => {
     body: { username, password }
   })
 
-  if (error) return toast(error)
+  if (error) {
+    toast(error)
+    return null
+  }
+  
   return redirect('/sign-in')
 }

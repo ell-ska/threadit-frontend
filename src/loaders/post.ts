@@ -9,7 +9,10 @@ export const postLoader = async ({ params }: LoaderFunctionArgs) => {
 
   const { data, error } = await client.get(`/posts/${id}`)
 
-  if (error) return toast(error)
+  if (error) {
+    toast(error)
+    return null
+  }
 
   const validatedData = validatePost(data)
   if (!validatedData) return null
