@@ -34,7 +34,7 @@ const authorSchema = z.union([
 const commentSchema = z.object({
   _id: z.string(),
   body: z.string(),
-  author: z.string()
+  author: authorSchema
 })
 
 const postSchema = z.object({
@@ -52,6 +52,7 @@ const postSchema = z.object({
   }).optional(),
   author: authorSchema,
   comments: commentSchema.array().optional(),
+  commentCount: z.number().optional(),
   upvotes: z.string().array().optional(),
   downvotes: z.string().array().optional(),
   score: z.number()

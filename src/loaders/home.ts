@@ -9,7 +9,6 @@ export const homeLoader = async ({ request }: LoaderFunctionArgs) => {
   const page = parseInt(url.searchParams.get('page') || '1')
 
   const { data, error } = await client.get('/posts' + `?page=${page}`)
-  console.log(data)
 
   if (error) {
     toast(error)

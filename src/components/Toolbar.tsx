@@ -1,18 +1,22 @@
-import { Form, useLocation } from 'react-router-dom'
+import { Form, useLocation, useNavigate } from 'react-router-dom'
 import { ArrowBigDown, ArrowBigUp, MessageCircle } from 'lucide-react'
 
+import auth from '../lib/auth'
+import { cn } from '../utils/classnames'
 import Button from './ui/Button'
 
 type ToolbarProps = {
   postId: string
   score: number
-  upvotes: string[]
-  downvotes: string[]
-  comments: number
+  upvotes: string[] | undefined
+  downvotes: string[] | undefined
+  comments: number | undefined
 }
 
-const Toolbar = ({ postId, score, comments }: ToolbarProps) => {
+const Toolbar = ({ postId, score, comments, upvotes, downvotes }: ToolbarProps) => {
   const location = useLocation()
+  const navigate = useNavigate()
+  const userId = auth.getUser()
 
   return (
     <div className='flex gap-4 items-center'>
@@ -23,9 +27,13 @@ const Toolbar = ({ postId, score, comments }: ToolbarProps) => {
           <Button
             size='icon'
             variant='ghost'
-            className='hover:text-secondary hover:bg-zinc-50'
+            className='hover:bg-zinc-50 hover:text-secondary'
           >
-            <ArrowBigUp />
+            <ArrowBigUp
+              className={cn(
+                userId && upvotes?.includes(userId) && 'stroke-secondary fill-secondary'
+              )}
+            />
           </Button>
         </Form>
         <span>{score}</span>
@@ -35,16 +43,22 @@ const Toolbar = ({ postId, score, comments }: ToolbarProps) => {
           <Button
             size='icon'
             variant='ghost'
-            className='hover:text-primary hover:bg-zinc-50'
+            className='hover:bg-zinc-50 hover:text-primary'
           >
-            <ArrowBigDown />
+            <ArrowBigDown className={cn(
+                userId && downvotes?.includes(userId) && 'stroke-primary fill-primary'
+              )}
+            />
           </Button>
         </Form>
       </div>
 
       <div className='bg-zinc-100 rounded-full group-hover:bg-zinc-200 transition'>
         <Button
-          onClick={e => e.stopPropagation()}
+          onClick={(e) => {
+            e.stopPropagation()
+            navigate(`post/${postId}/#comments`)
+          }}
           size='icon'
           variant='ghost'
           className='hover:bg-zinc-50'

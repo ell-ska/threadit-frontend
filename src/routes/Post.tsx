@@ -26,7 +26,7 @@ const Post = () => {
           </Link>
         )}
       </article>
-      <div>
+      <div id='comments'>
         <CommentForm postId={post._id} />
         {post.comments?.map(comment => <p key={comment._id}>{comment.body}</p>)}
       </div>

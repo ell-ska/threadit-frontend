@@ -7,6 +7,7 @@ import { Feed } from '../types'
 const Home = () => {
   const data = useLoaderData() as Feed | null
   const [searchParams, setSearchParams] = useSearchParams()
+  console.log(data)
 
   return (
     <ul className='flex flex-col gap-4 mb-8'>
