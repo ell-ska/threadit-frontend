@@ -27,10 +27,11 @@ const Toolbar = ({ postId, score, comments, upvotes, downvotes }: ToolbarProps) 
           <Button
             size='icon'
             variant='ghost'
-            className='hover:bg-zinc-50 hover:text-secondary'
+            className='hover:bg-zinc-50 hover:text-secondary p-1 md:p-2'
           >
             <ArrowBigUp
               className={cn(
+                'size-5 md:size-6',
                 userId && upvotes?.includes(userId) && 'stroke-secondary fill-secondary'
               )}
             />
@@ -43,9 +44,10 @@ const Toolbar = ({ postId, score, comments, upvotes, downvotes }: ToolbarProps) 
           <Button
             size='icon'
             variant='ghost'
-            className='hover:bg-zinc-50 hover:text-primary'
+            className='hover:bg-zinc-50 hover:text-primary p-1 md:p-2'
           >
             <ArrowBigDown className={cn(
+                'size-5 md:size-6',
                 userId && downvotes?.includes(userId) && 'stroke-primary fill-primary'
               )}
             />
@@ -61,9 +63,9 @@ const Toolbar = ({ postId, score, comments, upvotes, downvotes }: ToolbarProps) 
           }}
           size='icon'
           variant='ghost'
-          className='hover:bg-zinc-50'
+          className='hover:bg-zinc-50 p-1 md:p-2'
         >
-          <MessageCircle />
+          <MessageCircle className='size-5 md:size-6'/>
           <span>{comments}</span>
         </Button>
       </div>

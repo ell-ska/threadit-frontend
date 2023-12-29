@@ -55,7 +55,8 @@ const postSchema = z.object({
   commentCount: z.number().optional(),
   upvotes: z.string().array().optional(),
   downvotes: z.string().array().optional(),
-  score: z.number()
+  score: z.number(),
+  createdAt: z.string()
 })
 
 const feedSchema = z.object({
