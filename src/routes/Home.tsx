@@ -9,7 +9,7 @@ const Home = () => {
   const [searchParams, setSearchParams] = useSearchParams()
 
   return (
-    <ul className='flex flex-col gap-4 mb-8'>
+    <ul className='flex flex-col gap-4'>
       {data?.posts.map(post => <PostPreview key={post._id} {...post} />)}
       {data && (
         <Pagination

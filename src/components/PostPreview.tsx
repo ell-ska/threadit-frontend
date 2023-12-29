@@ -13,7 +13,7 @@ const PostPreview = ({ _id, createdAt, title, link, commentCount, upvotes, downv
     <li
       role='button'
       onClick={() => navigate(`post/${_id}`)}
-      className='group h-40 bg-white rounded-2xl flex justify-between items-center overflow-hidden hover:bg-zinc-100 transition'
+      className='card group h-40 flex justify-between items-center overflow-hidden hover:bg-zinc-100 transition'
     >
       <div className='p-4 flex flex-col gap-6 justify-between h-full'>
         <div className='md:space-y-2'>

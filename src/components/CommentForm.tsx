@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import { useFetcher } from 'react-router-dom'
+import { Send } from 'lucide-react'
 
 import Button from './ui/Button'
 import { inputVariants } from './ui/Input'
@@ -17,21 +18,24 @@ const CommentForm = ({ postId }: CommentFormProps) => {
   }
 
   return (
-    <div>
-      <h3>Leave a comment</h3>
-      <fetcher.Form method='post' action={`/posts/${postId}/comments`}>
-        <label htmlFor='body' hidden>Add a comment</label>
-        <textarea
-          ref={ref}
-          className={inputVariants({ className: 'w-2/3 min-h-[12rem]' })}
-          name='body'
-          id='body'
-          placeholder='Add a comment'
-          required
-        />
-        <Button type='submit'>Post comment</Button>
-      </fetcher.Form>
-    </div>
+    <fetcher.Form
+      method='post'
+      action={`/posts/${postId}/comments`}
+      className='card p-2 flex gap-4 items-end w-3/4 border border-white focus-within:border-secondary'
+    >
+      <label htmlFor='body' hidden>Leave a comment</label>
+      <textarea
+        ref={ref}
+        className={inputVariants({ className: 'w-full min-h-[8rem] border-none resize-none' })}
+        name='body'
+        id='body'
+        placeholder='Write your comment'
+        required
+      />
+      <Button type='submit' className='whitespace-nowrap'>
+        <Send />
+      </Button>
+    </fetcher.Form>
   )
 }
 

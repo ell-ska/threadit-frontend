@@ -59,7 +59,11 @@ const Toolbar = ({ postId, score, comments, upvotes, downvotes }: ToolbarProps) 
         <Button
           onClick={(e) => {
             e.stopPropagation()
-            navigate(`post/${postId}/#comments`)
+            navigate(
+              location.pathname === '/'
+                ? `post/${postId}/#comments`
+                : '#comments'
+            )
           }}
           size='icon'
           variant='ghost'

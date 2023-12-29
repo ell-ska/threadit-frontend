@@ -6,6 +6,10 @@
 
 @layer base {
   .main {
-    @apply w-full max-w-6xl px-6
+    @apply w-full max-w-6xl px-6 pb-6 md:pb-8
+  }
+  
+  .card {
+    @apply bg-white rounded-2xl
   }
 }

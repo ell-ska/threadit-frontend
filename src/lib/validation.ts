@@ -34,7 +34,8 @@ const authorSchema = z.union([
 const commentSchema = z.object({
   _id: z.string(),
   body: z.string(),
-  author: authorSchema
+  author: authorSchema,
+  createdAt: z.string()
 })
 
 const postSchema = z.object({
