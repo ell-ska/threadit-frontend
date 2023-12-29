@@ -14,7 +14,7 @@ const Post = () => {
 
   return (
     <>
-      <article className='flex justify-between items-start mt-12'>
+      <article className='flex justify-between gap-y-4 flex-col md:flex-row items-start mt-12'>
         <div>
           <PostHeader
             username={typeof post.author !== 'string' ? post.author.username : undefined}
@@ -22,11 +22,11 @@ const Post = () => {
             createdAt={post.createdAt}
           />
           <h1 className='text-3xl font-bold mt-2'>{post.title}</h1>
-          {post.body && <p className='w-4/5 mt-4'>{post.body}</p>}
+          {post.body && <p className='md:w-4/5 mt-4'>{post.body}</p>}
         </div>
         <div className='space-y-4'>
           {post.link && (
-            <Link to={post.link.url} className='block shrink-0 max-w-xs rounded-2xl border border-zinc-200 overflow-hidden'>
+            <Link to={post.link.url} className='block shrink-0 w-full sm:max-w-xs rounded-2xl border border-zinc-200 overflow-hidden'>
               {post.link.image && <img src={post.link.image} className='border-b border-zinc-200' />}
               <div className='flex justify-between gap-8 items-center px-4 py-2'>
                 <span>{new URL(post.link.url).hostname}</span>
@@ -45,7 +45,7 @@ const Post = () => {
       </article>
       <div id='comments' className='mt-12 flex flex-col items-center'>
         <CommentForm postId={post._id} />
-        <div className='space-y-4 mt-6 w-3/4'>
+        <div className='space-y-4 mt-6 md:w-3/4'>
           {post.comments?.sort((a, b) => {
             const aDate = new Date(a.createdAt)
             const bDate = new Date(b.createdAt)
