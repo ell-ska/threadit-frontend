@@ -1,5 +1,5 @@
 # Reddit Clone
-This school project included building a React frontend and an Express.js backend utilizing MongoDb.
+This school project included building a React frontend and an [Express.js backend utilizing MongoDb](https://github.com/ell-ska/threadit-backend)
 
 ## Features
 - Authentication through JWT
