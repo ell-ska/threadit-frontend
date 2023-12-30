@@ -13,7 +13,7 @@ const Header = () => {
       <div className='flex gap-4 items-center'>
         {isAuthenticated ? (
           <>
-            <Link to='/create-post'>New post</Link>
+            <Link to='/create-post' className={buttonVariants({ variant: 'secondary', size: 'sm' })}>New post</Link>
             <fetcher.Form method='post' action='/sign-out'>
               <Button type='submit' variant='ghost' size='sm'>sign out</Button>
             </fetcher.Form>
